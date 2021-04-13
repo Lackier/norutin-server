@@ -19,6 +19,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
         http
+            .cors().and()
             .httpBasic().disable()
             .csrf().disable()
             .authorizeRequests()

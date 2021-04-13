@@ -12,6 +12,6 @@ open class UserEntity(
     @Column(name = "create_dt")
     open var createDate: Date,
 
-    @Column(name = "oid")
-    open val oid: String
+    @Column(name = "uid")
+    open val uid: String
 ) : AbstractEntity()

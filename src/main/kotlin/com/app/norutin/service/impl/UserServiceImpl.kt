@@ -12,8 +12,8 @@ import java.util.*
 class UserServiceImpl(private val userRepository: UserRepository) : UserService {
     private val userMapper: UserMapper = Mappers.getMapper(UserMapper::class.java)
 
-    override fun findByUid(oid: String): User? {
-        val userEntity = userRepository.findByOid(oid) ?: return null
+    override fun findByUid(uid: String): User? {
+        val userEntity = userRepository.findByUid(uid) ?: return null
 
         return userMapper.map(userEntity)
     }

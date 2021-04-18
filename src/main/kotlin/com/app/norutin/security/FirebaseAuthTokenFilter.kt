@@ -50,13 +50,10 @@ class FirebaseAuthTokenFilter : OncePerRequestFilter() {
 
     @Throws(Exception::class)
     private fun authenticateFirebaseToken(authTokenFirebase: String): FirebaseToken {
-        var authToken = authTokenFirebase
-        authToken = authToken.substring(7)
-        val app = FirebaseAuth.getInstance().verifyIdTokenAsync(authToken)
-        return app.get()
+        return FirebaseAuth.getInstance().verifyIdToken(authTokenFirebase)
     }
 
     companion object {
-        private const val TOKEN_HEADER = "Authorization"
+        private const val TOKEN_HEADER = "firebase_token"
     }
 }

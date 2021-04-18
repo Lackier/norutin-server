@@ -3,14 +3,12 @@ package com.app.norutin.controller
 import com.app.norutin.mapper.UserMapper
 import com.app.norutin.model.User
 import com.app.norutin.model.request.CreateUserRequest
-import com.app.norutin.security.SecurityService
 import com.app.norutin.service.api.UserService
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.UserRecord
 import lombok.extern.slf4j.Slf4j
 import org.mapstruct.factory.Mappers
-import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.net.URI

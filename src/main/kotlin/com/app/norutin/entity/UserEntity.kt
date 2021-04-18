@@ -15,6 +15,12 @@ open class UserEntity(
     @Column(name = "uid")
     open val uid: String,
 
+    @Column(name = "email")
+    open val email: String,
+
+    @Column(name = "phone_number")
+    open val phoneNumber: String,
+
     @OneToMany
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     open val desks: List<DeskEntity>?

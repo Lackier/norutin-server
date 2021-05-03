@@ -9,6 +9,8 @@ import com.app.norutin.service.api.DeskService
 import org.mapstruct.factory.Mappers
 import org.springframework.stereotype.Service
 import java.util.*
+import java.util.Optional.empty
+import java.util.Optional.of
 import java.util.stream.Collectors
 
 @Service
@@ -26,5 +28,14 @@ class DeskServiceImpl(private val deskRepository: DeskRepository) : DeskService 
         return userEntity.desks!!.stream()
             .map { deskEntity -> deskMapper.map(deskEntity) }
             .collect(Collectors.toList())
+    }
+
+    override fun getDesk(id: Int): Optional<Desk> {
+        val deskEntity = deskRepository.findById(id)
+        if (deskEntity.isEmpty) {
+            return empty()
+        }
+
+        return of(deskMapper.map(deskEntity.get()))
     }
 }

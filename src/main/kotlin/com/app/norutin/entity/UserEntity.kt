@@ -6,6 +6,8 @@ import javax.persistence.*
 @Entity
 @Table(name = "users")
 open class UserEntity(
+    id: Int?,
+
     @Column(name = "name")
     open val name: String,
 
@@ -18,4 +20,4 @@ open class UserEntity(
     @OneToMany
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     open val desks: List<DeskEntity>?
-) : AbstractEntity()
+) : AbstractEntity(id)

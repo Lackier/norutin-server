@@ -4,6 +4,7 @@ import com.app.norutin.mapper.DeskMapper
 import com.app.norutin.mapper.UserMapper
 import com.app.norutin.model.Desk
 import com.app.norutin.model.User
+import com.app.norutin.model.request.CreateDesksRequest
 import com.app.norutin.repo.DeskRepository
 import com.app.norutin.service.api.DeskService
 import org.mapstruct.factory.Mappers
@@ -21,11 +22,9 @@ class DeskServiceImpl(private val deskRepository: DeskRepository) : DeskService 
     override fun getUserDesks(user: User): List<Desk> {
         val userEntity = userMapper.map(user)
 
-        if (userEntity.desks == null) {
-            return Collections.emptyList()
-        }
+        val desks = deskRepository.findByUser(userEntity)
 
-        return userEntity.desks!!.stream()
+        return desks.stream()
             .map { deskEntity -> deskMapper.map(deskEntity) }
             .collect(Collectors.toList())
     }
@@ -37,5 +36,15 @@ class DeskServiceImpl(private val deskRepository: DeskRepository) : DeskService 
         }
 
         return of(deskMapper.map(deskEntity.get()))
+    }
+
+    override fun create(createDeskRequest: CreateDesksRequest, userId: Int): Desk {
+        val newDesk = deskMapper.map(createDeskRequest)
+        newDesk.userId = userId
+        newDesk.createDate = Date()
+
+        val newDeskEntity = deskRepository.save(deskMapper.map(newDesk))
+
+        return deskMapper.map(newDeskEntity)
     }
 }

@@ -34,6 +34,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.google.firebase:firebase-admin:7.1.1")
     implementation("org.mapstruct:mapstruct:1.4.2.Final")
+    implementation ("org.jeasy:easy-random-core:5.0.0")
 
     kapt("org.mapstruct:mapstruct-processor:1.4.2.Final")
     compileOnly("org.projectlombok:lombok")

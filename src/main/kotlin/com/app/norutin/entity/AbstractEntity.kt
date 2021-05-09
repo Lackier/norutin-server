@@ -4,11 +4,12 @@ import org.springframework.data.util.ProxyUtils
 import javax.persistence.*
 
 @MappedSuperclass
-abstract class AbstractEntity {
+abstract class AbstractEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private var id: Int? = null
+) {
 
     open fun getId(): Int? {
         return id

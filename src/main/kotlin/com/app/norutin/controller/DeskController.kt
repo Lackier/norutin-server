@@ -1,7 +1,7 @@
 package com.app.norutin.controller
 
 import com.app.norutin.model.Desk
-import com.app.norutin.model.request.CreateDesksRequest
+import com.app.norutin.model.request.CreateDeskRequest
 import com.app.norutin.model.request.GetDesksRequest
 import com.app.norutin.model.response.ApiError
 import com.app.norutin.model.response.ServerResponse
@@ -47,7 +47,7 @@ class DeskController(
 
     @PostMapping("/create")
     @Throws(URISyntaxException::class)
-    fun createDesk(createDeskRequest: CreateDesksRequest): ResponseEntity<ServerResponse<Desk>> {
+    fun createDesk(createDeskRequest: CreateDeskRequest): ResponseEntity<ServerResponse<Desk>> {
         val user = securityService.currentUser() ?: return ResponseEntity.badRequest().body(null)
 
         val desk = deskService.create(createDeskRequest, user.id!!)

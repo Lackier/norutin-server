@@ -6,6 +6,8 @@ import javax.persistence.*
 @Entity
 @Table(name = "desk")
 open class DeskEntity (
+    id: Int?,
+
     @Column(name = "name")
     open val name: String,
 
@@ -14,5 +16,5 @@ open class DeskEntity (
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    open val user: UserEntity
-) : AbstractEntity()
+    open var user: UserEntity?
+) : AbstractEntity(id)

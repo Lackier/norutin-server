@@ -4,8 +4,10 @@ import com.app.norutin.mapper.DeskMapper
 import com.app.norutin.mapper.UserMapper
 import com.app.norutin.model.Desk
 import com.app.norutin.model.User
-import com.app.norutin.model.request.CreateDesksRequest
+import com.app.norutin.model.request.CreateDeskRequest
+import com.app.norutin.model.request.EditDeskRequest
 import com.app.norutin.repo.DeskRepository
+import com.app.norutin.repo.UserRepository
 import com.app.norutin.service.api.DeskService
 import org.mapstruct.factory.Mappers
 import org.springframework.stereotype.Service
@@ -15,7 +17,10 @@ import java.util.Optional.of
 import java.util.stream.Collectors
 
 @Service
-class DeskServiceImpl(private val deskRepository: DeskRepository) : DeskService {
+class DeskServiceImpl(
+    private val deskRepository: DeskRepository,
+    private val userRepository: UserRepository
+) : DeskService {
     private val deskMapper: DeskMapper = Mappers.getMapper(DeskMapper::class.java)
     private val userMapper: UserMapper = Mappers.getMapper(UserMapper::class.java)
 
@@ -38,13 +43,26 @@ class DeskServiceImpl(private val deskRepository: DeskRepository) : DeskService 
         return of(deskMapper.map(deskEntity.get()))
     }
 
-    override fun create(createDeskRequest: CreateDesksRequest, userId: Int): Desk {
+    override fun create(createDeskRequest: CreateDeskRequest, userId: Int): Desk {
         val newDesk = deskMapper.map(createDeskRequest)
         newDesk.userId = userId
         newDesk.createDate = Date()
 
-        val newDeskEntity = deskRepository.save(deskMapper.map(newDesk))
+        val newDeskEntity = deskMapper.map(newDesk)
+        newDeskEntity.user = userRepository.findById(userId).get()
+        deskRepository.save(newDeskEntity)
 
         return deskMapper.map(newDeskEntity)
+    }
+
+    override fun edit(editDeskRequest: EditDeskRequest, userId: Int): Desk {
+        val editDesk = deskMapper.map(editDeskRequest)
+        editDesk.userId = userId
+
+        val editDeskEntity = deskMapper.map(editDesk)
+        editDeskEntity.user = userRepository.findById(userId).get()
+        deskRepository.save(editDeskEntity)
+
+        return deskMapper.map(editDeskEntity)
     }
 }

@@ -9,6 +9,7 @@ import com.app.norutin.model.request.EditDeskRequest
 import com.app.norutin.repo.DeskRepository
 import com.app.norutin.repo.UserRepository
 import com.app.norutin.service.api.DeskService
+import com.app.norutin.service.api.TaskSettingsService
 import org.mapstruct.factory.Mappers
 import org.springframework.stereotype.Service
 import java.util.*
@@ -19,7 +20,8 @@ import java.util.stream.Collectors
 @Service
 class DeskServiceImpl(
     private val deskRepository: DeskRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val taskSettingsService: TaskSettingsService
 ) : DeskService {
     private val deskMapper: DeskMapper = Mappers.getMapper(DeskMapper::class.java)
     private val userMapper: UserMapper = Mappers.getMapper(UserMapper::class.java)
@@ -51,6 +53,10 @@ class DeskServiceImpl(
         val newDeskEntity = deskMapper.map(newDesk)
         newDeskEntity.user = userRepository.findById(userId).get()
         deskRepository.save(newDeskEntity)
+
+        if (createDeskRequest.fillDefaultSettings) {
+            taskSettingsService.createDefaultSettings(newDeskEntity)
+        }
 
         return deskMapper.map(newDeskEntity)
     }

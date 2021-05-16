@@ -26,6 +26,8 @@ class TaskSettingsServiceImpl(
     override fun createDefaultSettings(desk: DeskEntity): DeskValueEntity {
         val deskValueEntity = DeskValueEntity(null, desk)
 
+        val a = 0
+
         val defTaskTypes = taskTypeDefRepository.findAll()
         deskValueEntity.taskTypes = defTaskTypes.stream()
             .map { defTaskType -> taskTypeMapper.map(defTaskType) }

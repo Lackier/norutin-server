@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface TaskTypeRepository : JpaRepository<TaskTypeEntity, Int> {
+    fun getByDeskValueId(deskValueId: Int): List<TaskTypeEntity>
 }

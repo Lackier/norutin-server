@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface PriorityTypeRepository : JpaRepository<PriorityTypeEntity, Int> {
+    fun getByDeskValueId(deskValueId: Int): List<PriorityTypeEntity>
 }

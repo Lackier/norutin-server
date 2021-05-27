@@ -9,7 +9,7 @@ import com.app.norutin.model.request.EditDeskRequest
 import com.app.norutin.repo.DeskRepository
 import com.app.norutin.repo.UserRepository
 import com.app.norutin.service.api.DeskService
-import com.app.norutin.service.api.TaskSettingsService
+import com.app.norutin.service.api.DeskSettingsService
 import org.mapstruct.factory.Mappers
 import org.springframework.stereotype.Service
 import java.util.*
@@ -21,7 +21,7 @@ import java.util.stream.Collectors
 class DeskServiceImpl(
     private val deskRepository: DeskRepository,
     private val userRepository: UserRepository,
-    private val taskSettingsService: TaskSettingsService
+    private val deskSettingsService: DeskSettingsService
 ) : DeskService {
     private val deskMapper: DeskMapper = Mappers.getMapper(DeskMapper::class.java)
     private val userMapper: UserMapper = Mappers.getMapper(UserMapper::class.java)
@@ -29,9 +29,9 @@ class DeskServiceImpl(
     override fun getUserDesks(user: User): List<Desk> {
         val userEntity = userMapper.map(user)
 
-        val desks = deskRepository.findByUser(userEntity)
+        val deskEntities = deskRepository.findByUser(userEntity)
 
-        return desks.stream()
+        return deskEntities.stream()
             .map { deskEntity -> deskMapper.map(deskEntity) }
             .collect(Collectors.toList())
     }
@@ -55,7 +55,7 @@ class DeskServiceImpl(
         deskRepository.save(newDeskEntity)
 
         if (createDeskRequest.fillDefaultSettings) {
-            taskSettingsService.createDefaultSettings(newDeskEntity)
+            deskSettingsService.createDefaultSettings(newDeskEntity)
         }
 
         return deskMapper.map(newDeskEntity)
@@ -78,6 +78,8 @@ class DeskServiceImpl(
         if (deskEntity.isEmpty) {
             return empty()
         }
+
+        deskSettingsService.deleteAll(deskEntity.get().getId()!!)
 
         deskRepository.delete(deskEntity.get())
 

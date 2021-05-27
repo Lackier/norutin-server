@@ -3,18 +3,24 @@ package com.app.norutin.service.impl
 import com.app.norutin.entity.DeskValueEntity
 import com.app.norutin.entity.TaskStatusEntity
 import com.app.norutin.mapper.TaskStatusMapper
+import com.app.norutin.model.TaskStatus
+import com.app.norutin.model.request.CreateDeskTaskStatusRequest
+import com.app.norutin.model.request.EditDeskTaskStatusRequest
+import com.app.norutin.model.request.GetDeskTaskStatusesRequest
+import com.app.norutin.repo.DeskValueRepository
 import com.app.norutin.repo.TaskStatusRepository
 import com.app.norutin.repo.def.TaskStatusDefRepository
-import com.app.norutin.service.api.PriorityTypeService
 import com.app.norutin.service.api.TaskStatusService
 import org.mapstruct.factory.Mappers
 import org.springframework.stereotype.Service
+import java.util.*
 import java.util.stream.Collectors
 
 @Service
 class TaskStatusServiceImpl(
     private val taskStatusDefRepository: TaskStatusDefRepository,
-    private val taskStatusRepository: TaskStatusRepository
+    private val taskStatusRepository: TaskStatusRepository,
+    private val deskValueRepository: DeskValueRepository
 ) : TaskStatusService {
     private val taskStatusMapper: TaskStatusMapper = Mappers.getMapper(TaskStatusMapper::class.java)
 
@@ -26,5 +32,40 @@ class TaskStatusServiceImpl(
             .collect(Collectors.toList())
 
         return taskStatusRepository.saveAll(taskStatuses)
+    }
+
+    override fun getForDesk(getDeskTaskStatusesRequest: GetDeskTaskStatusesRequest): List<TaskStatus> {
+        val deskValueId = deskValueRepository.getByDeskId(getDeskTaskStatusesRequest.deskId).getId()
+        val taskStatusEntities = taskStatusRepository.getByDeskValueId(deskValueId!!)
+
+        return taskStatusEntities.stream()
+            .map { priorityTypeEntity -> taskStatusMapper.map(priorityTypeEntity) }
+            .collect(Collectors.toList())
+    }
+
+    override fun create(createDeskTaskStatusRequest: CreateDeskTaskStatusRequest): TaskStatus {
+        TODO("Not yet implemented")
+    }
+
+    override fun edit(editDeskTaskStatusRequest: EditDeskTaskStatusRequest): TaskStatus {
+        TODO("Not yet implemented")
+    }
+
+    override fun delete(id: Int): Optional<Int> {
+        val taskStatusEntity = taskStatusRepository.findById(id)
+
+        if (taskStatusEntity.isEmpty) {
+            return Optional.empty()
+        }
+
+        taskStatusRepository.delete(taskStatusEntity.get())
+
+        return Optional.of(id)
+    }
+
+    override fun deleteAll(deskValueId: Int) {
+        val taskStatusEntities = taskStatusRepository.getByDeskValueId(deskValueId)
+
+        taskStatusRepository.deleteAll(taskStatusEntities)
     }
 }

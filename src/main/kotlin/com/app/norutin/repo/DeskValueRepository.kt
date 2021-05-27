@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface DeskValueRepository : JpaRepository<DeskValueEntity, Int> {
+    fun getByDeskId(deskId: Int): DeskValueEntity
 }

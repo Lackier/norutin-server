@@ -71,4 +71,16 @@ class DeskServiceImpl(
 
         return deskMapper.map(editDeskEntity)
     }
+
+    override fun delete(deskId: Int): Optional<Int> {
+        val deskEntity = deskRepository.findById(deskId)
+
+        if (deskEntity.isEmpty) {
+            return empty()
+        }
+
+        deskRepository.delete(deskEntity.get())
+
+        return of(deskId)
+    }
 }

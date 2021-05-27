@@ -65,4 +65,17 @@ class DeskController(
 
         return ResponseEntity.ok(ServerResponse(desk))
     }
+
+    @DeleteMapping()
+    @Throws(URISyntaxException::class)
+    fun deleteDesk(deskId: Int): ResponseEntity<ServerResponse<Int>> {
+        val deletedDeskId = deskService.delete(deskId)
+
+        if (deletedDeskId.isEmpty) {
+            val apiError = ApiError(HttpStatus.NOT_FOUND, "No desk found with id: $deskId")
+            return ResponseEntity.ok(ServerResponse(apiError))
+        }
+
+        return ResponseEntity.ok(ServerResponse(deletedDeskId.get()))
+    }
 }

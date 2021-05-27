@@ -11,4 +11,5 @@ interface DeskService {
     fun getDesk(id: Int): Optional<Desk>
     fun create(createDeskRequest: CreateDeskRequest, userId: Int): Desk
     fun edit(editDeskRequest: EditDeskRequest, userId: Int): Desk
+    fun delete(deskId: Int): Optional<Int>
 }

@@ -4,6 +4,7 @@ import com.app.norutin.entity.DeskEntity
 import com.app.norutin.entity.DeskValueEntity
 
 interface DeskSettingsService {
-    fun createDefaultSettings(desk: DeskEntity): DeskValueEntity
+    fun createDefaultSettings(deskId: Int)
     fun deleteAll(deskId: Int)
+    fun createSettings(desk: DeskEntity): DeskValueEntity
 }

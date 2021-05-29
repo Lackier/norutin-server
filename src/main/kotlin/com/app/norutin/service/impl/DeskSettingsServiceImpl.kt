@@ -16,14 +16,12 @@ class DeskSettingsServiceImpl(
     private val taskStatusService: TaskStatusService,
     private val priorityTypeService: PriorityTypeService
 ) : DeskSettingsService {
-    override fun createDefaultSettings(desk: DeskEntity): DeskValueEntity {
-        val deskValueEntity = deskValueRepository.save(DeskValueEntity(null, desk))
+    override fun createDefaultSettings(deskId: Int) {
+        val deskValueEntity = deskValueRepository.getByDeskId(deskId)
 
         deskValueEntity.taskTypes = taskTypeService.createDefault(deskValueEntity)
         deskValueEntity.taskStatuses = taskStatusService.createDefault(deskValueEntity)
         deskValueEntity.priorityTypes = priorityTypeService.createDefault(deskValueEntity)
-
-        return deskValueEntity
     }
 
     override fun deleteAll(deskId: Int) {
@@ -34,5 +32,9 @@ class DeskSettingsServiceImpl(
         priorityTypeService.deleteAll(deskValueEntity.getId()!!)
 
         deskValueRepository.delete(deskValueEntity)
+    }
+
+    override fun createSettings(desk: DeskEntity): DeskValueEntity {
+        return deskValueRepository.save(DeskValueEntity(null, desk))
     }
 }

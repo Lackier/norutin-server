@@ -54,19 +54,17 @@ class DeskServiceImpl(
         newDeskEntity.user = userRepository.findById(userId).get()
         deskRepository.save(newDeskEntity)
 
+        deskSettingsService.createSettings(newDeskEntity)
         if (createDeskRequest.fillDefaultSettings) {
-            deskSettingsService.createDefaultSettings(newDeskEntity)
+            deskSettingsService.createDefaultSettings(newDeskEntity.getId()!!)
         }
 
         return deskMapper.map(newDeskEntity)
     }
 
     override fun edit(editDeskRequest: EditDeskRequest, userId: Int): Desk {
-        val editDesk = deskMapper.map(editDeskRequest)
-        editDesk.userId = userId
-
-        val editDeskEntity = deskMapper.map(editDesk)
-        editDeskEntity.user = userRepository.findById(userId).get()
+        val editDeskEntity = deskRepository.findById(editDeskRequest.id).get()
+        editDeskEntity.name = editDeskRequest.name
         deskRepository.save(editDeskEntity)
 
         return deskMapper.map(editDeskEntity)

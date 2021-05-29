@@ -10,7 +10,7 @@ abstract class AbstractDeskSettingEntity(
     id: Int?,
 
     @Column(name = "name")
-    open val name: String,
+    open var name: String,
 
     @ManyToOne
     @JoinColumn(name = "desk_value_id", referencedColumnName = "id", nullable = false)

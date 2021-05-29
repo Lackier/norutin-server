@@ -12,7 +12,10 @@ import org.mapstruct.Mappings
 interface DeskMapper {
     @Mappings(Mapping(target="userId", source="user.id"))
     fun map(entity: DeskEntity): Desk
+
     fun map(desk: Desk): DeskEntity
+
     fun map(createDeskRequest: CreateDeskRequest): Desk
+
     fun map(editDeskRequest: EditDeskRequest): Desk
 }

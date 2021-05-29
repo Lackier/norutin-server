@@ -1,4 +1,3 @@
 package com.app.norutin.model.request
 
-class EditDeskPriorityTypeRequest {
-}
+class EditDeskPriorityTypeRequest (val id: Int, val name: String)

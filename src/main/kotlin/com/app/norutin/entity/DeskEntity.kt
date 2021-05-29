@@ -9,7 +9,7 @@ open class DeskEntity (
     id: Int?,
 
     @Column(name = "name")
-    open val name: String,
+    open var name: String,
 
     @Column(name = "create_dt")
     open var createDate: Date,

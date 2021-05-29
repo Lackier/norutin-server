@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") version "2.5.0-SNAPSHOT"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
+    id("org.flywaydb.flyway") version "6.0.0-beta2"
     war
     kotlin("jvm") version "1.4.30"
     kotlin("plugin.spring") version "1.4.30"
@@ -17,6 +18,13 @@ configurations {
     compileOnly {
         extendsFrom(configurations.annotationProcessor.get())
     }
+}
+
+flyway {
+    url = "jdbc:postgresql://localhost:5432/norutin-db"
+    user = "postgres"
+    password = "postgres"
+    schemas = arrayOf("public")
 }
 
 repositories {
@@ -37,11 +45,10 @@ dependencies {
     implementation ("org.jeasy:easy-random-core:5.0.0")
 
     kapt("org.mapstruct:mapstruct-processor:1.4.2.Final")
+    compile("org.postgresql:postgresql:42.2.6")
     compileOnly("org.projectlombok:lombok")
 
     runtimeOnly("org.postgresql:postgresql")
-    /*annotationProcessor("org.projectlombok:lombok")
-    annotationProcessor("org.mapstruct:mapstruct-processor:1.4.2.Final")*/
 
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 

@@ -44,11 +44,21 @@ class PriorityTypeServiceImpl(
     }
 
     override fun create(createDeskPriorityTypeRequest: CreateDeskPriorityTypeRequest): TaskPriority {
-        TODO("Not yet implemented")
+        val deskValue = deskValueRepository.getByDeskId(createDeskPriorityTypeRequest.deskId)
+
+        var priorityTypeEntity = priorityTypeMapper.map(createDeskPriorityTypeRequest, deskValue)
+        priorityTypeEntity = priorityTypeRepository.save(priorityTypeEntity)
+
+        return priorityTypeMapper.map(priorityTypeEntity)
     }
 
     override fun edit(editDeskPriorityTypeRequest: EditDeskPriorityTypeRequest): TaskPriority {
-        TODO("Not yet implemented")
+        var priorityTypeEntity = priorityTypeRepository.findById(editDeskPriorityTypeRequest.id).get()
+        priorityTypeEntity.name = editDeskPriorityTypeRequest.name
+
+        priorityTypeEntity = priorityTypeRepository.save(priorityTypeEntity)
+
+        return priorityTypeMapper.map(priorityTypeEntity)
     }
 
     override fun delete(id: Int): Optional<Int> {

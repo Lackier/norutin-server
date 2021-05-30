@@ -44,11 +44,21 @@ class TaskStatusServiceImpl(
     }
 
     override fun create(createDeskTaskStatusRequest: CreateDeskTaskStatusRequest): TaskStatus {
-        TODO("Not yet implemented")
+        val deskValue = deskValueRepository.getByDeskId(createDeskTaskStatusRequest.deskId)
+
+        var priorityTypeEntity = taskStatusMapper.map(createDeskTaskStatusRequest, deskValue)
+        priorityTypeEntity = taskStatusRepository.save(priorityTypeEntity)
+
+        return taskStatusMapper.map(priorityTypeEntity)
     }
 
     override fun edit(editDeskTaskStatusRequest: EditDeskTaskStatusRequest): TaskStatus {
-        TODO("Not yet implemented")
+        var priorityTypeEntity = taskStatusRepository.findById(editDeskTaskStatusRequest.id).get()
+        priorityTypeEntity.name = editDeskTaskStatusRequest.name
+
+        priorityTypeEntity = taskStatusRepository.save(priorityTypeEntity)
+
+        return taskStatusMapper.map(priorityTypeEntity)
     }
 
     override fun delete(id: Int): Optional<Int> {

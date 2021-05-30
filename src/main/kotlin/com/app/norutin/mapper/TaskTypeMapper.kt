@@ -4,7 +4,7 @@ import com.app.norutin.entity.DeskValueEntity
 import com.app.norutin.entity.TaskTypeEntity
 import com.app.norutin.entity.def.TaskTypeDefEntity
 import com.app.norutin.model.TaskType
-import com.app.norutin.model.request.CreateDeskTaskTypeRequest
+import com.app.norutin.model.request.create.CreateDeskTaskTypeRequest
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping
 import org.mapstruct.Mappings

@@ -2,8 +2,8 @@ package com.app.norutin.service.api
 
 import com.app.norutin.model.Desk
 import com.app.norutin.model.User
-import com.app.norutin.model.request.CreateDeskRequest
-import com.app.norutin.model.request.EditDeskRequest
+import com.app.norutin.model.request.create.CreateDeskRequest
+import com.app.norutin.model.request.edit.EditDeskRequest
 import java.util.*
 
 interface DeskService {

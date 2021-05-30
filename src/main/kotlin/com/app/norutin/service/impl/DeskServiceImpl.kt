@@ -4,8 +4,8 @@ import com.app.norutin.mapper.DeskMapper
 import com.app.norutin.mapper.UserMapper
 import com.app.norutin.model.Desk
 import com.app.norutin.model.User
-import com.app.norutin.model.request.CreateDeskRequest
-import com.app.norutin.model.request.EditDeskRequest
+import com.app.norutin.model.request.create.CreateDeskRequest
+import com.app.norutin.model.request.edit.EditDeskRequest
 import com.app.norutin.repo.DeskRepository
 import com.app.norutin.repo.UserRepository
 import com.app.norutin.service.api.DeskService

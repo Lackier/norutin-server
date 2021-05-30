@@ -1,9 +1,9 @@
 package com.app.norutin.controller
 
 import com.app.norutin.model.Desk
-import com.app.norutin.model.request.CreateDeskRequest
-import com.app.norutin.model.request.EditDeskRequest
-import com.app.norutin.model.request.GetDesksRequest
+import com.app.norutin.model.request.create.CreateDeskRequest
+import com.app.norutin.model.request.edit.EditDeskRequest
+import com.app.norutin.model.request.get.GetDesksRequest
 import com.app.norutin.model.response.ApiError
 import com.app.norutin.model.response.ServerResponse
 import com.app.norutin.security.SecurityService

@@ -4,9 +4,9 @@ import com.app.norutin.entity.DeskValueEntity
 import com.app.norutin.entity.TaskTypeEntity
 import com.app.norutin.mapper.TaskTypeMapper
 import com.app.norutin.model.TaskType
-import com.app.norutin.model.request.CreateDeskTaskTypeRequest
-import com.app.norutin.model.request.EditDeskTaskTypeRequest
-import com.app.norutin.model.request.GetDeskTaskTypesRequest
+import com.app.norutin.model.request.create.CreateDeskTaskTypeRequest
+import com.app.norutin.model.request.edit.EditDeskTaskTypeRequest
+import com.app.norutin.model.request.get.GetDeskTaskTypesRequest
 import com.app.norutin.repo.DeskValueRepository
 import com.app.norutin.repo.TaskTypeRepository
 import com.app.norutin.repo.def.TaskTypeDefRepository

@@ -2,7 +2,7 @@ package com.app.norutin.controller
 
 import com.app.norutin.mapper.UserMapper
 import com.app.norutin.model.User
-import com.app.norutin.model.request.CreateUserRequest
+import com.app.norutin.model.request.create.CreateUserRequest
 import com.app.norutin.service.api.UserService
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException

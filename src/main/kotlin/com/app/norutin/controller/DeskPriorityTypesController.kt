@@ -1,12 +1,11 @@
 package com.app.norutin.controller
 
 import com.app.norutin.model.TaskPriority
-import com.app.norutin.model.request.CreateDeskPriorityTypeRequest
-import com.app.norutin.model.request.EditDeskPriorityTypeRequest
-import com.app.norutin.model.request.GetDeskPriorityTypesRequest
+import com.app.norutin.model.request.create.CreateDeskPriorityTypeRequest
+import com.app.norutin.model.request.edit.EditDeskPriorityTypeRequest
+import com.app.norutin.model.request.get.GetDeskPriorityTypesRequest
 import com.app.norutin.model.response.ApiError
 import com.app.norutin.model.response.ServerResponse
-import com.app.norutin.security.SecurityService
 import com.app.norutin.service.api.PriorityTypeService
 import lombok.extern.slf4j.Slf4j
 import org.springframework.http.HttpStatus

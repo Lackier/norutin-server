@@ -4,9 +4,9 @@ import com.app.norutin.entity.DeskValueEntity
 import com.app.norutin.entity.PriorityTypeEntity
 import com.app.norutin.mapper.PriorityTypeMapper
 import com.app.norutin.model.TaskPriority
-import com.app.norutin.model.request.CreateDeskPriorityTypeRequest
-import com.app.norutin.model.request.EditDeskPriorityTypeRequest
-import com.app.norutin.model.request.GetDeskPriorityTypesRequest
+import com.app.norutin.model.request.create.CreateDeskPriorityTypeRequest
+import com.app.norutin.model.request.edit.EditDeskPriorityTypeRequest
+import com.app.norutin.model.request.get.GetDeskPriorityTypesRequest
 import com.app.norutin.repo.DeskValueRepository
 import com.app.norutin.repo.PriorityTypeRepository
 import com.app.norutin.repo.def.PriorityTypeDefRepository

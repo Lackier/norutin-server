@@ -3,9 +3,9 @@ package com.app.norutin.service.api
 import com.app.norutin.entity.DeskValueEntity
 import com.app.norutin.entity.TaskStatusEntity
 import com.app.norutin.model.TaskStatus
-import com.app.norutin.model.request.CreateDeskTaskStatusRequest
-import com.app.norutin.model.request.EditDeskTaskStatusRequest
-import com.app.norutin.model.request.GetDeskTaskStatusesRequest
+import com.app.norutin.model.request.create.CreateDeskTaskStatusRequest
+import com.app.norutin.model.request.edit.EditDeskTaskStatusRequest
+import com.app.norutin.model.request.get.GetDeskTaskStatusesRequest
 import java.util.*
 
 interface TaskStatusService {

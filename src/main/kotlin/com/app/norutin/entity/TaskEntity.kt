@@ -21,7 +21,7 @@ class TaskEntity(
     open var commitDate: Date,
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "desk_id", referencedColumnName = "id")
     open var desk: DeskEntity?,
 
     @Column(name = "description")

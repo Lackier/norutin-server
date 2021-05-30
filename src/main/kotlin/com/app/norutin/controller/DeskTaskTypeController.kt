@@ -1,7 +1,9 @@
 package com.app.norutin.controller
 
 import com.app.norutin.model.TaskType
-import com.app.norutin.model.request.*
+import com.app.norutin.model.request.create.CreateDeskTaskTypeRequest
+import com.app.norutin.model.request.edit.EditDeskTaskTypeRequest
+import com.app.norutin.model.request.get.GetDeskTaskTypesRequest
 import com.app.norutin.model.response.ApiError
 import com.app.norutin.model.response.ServerResponse
 import com.app.norutin.service.api.TaskTypeService

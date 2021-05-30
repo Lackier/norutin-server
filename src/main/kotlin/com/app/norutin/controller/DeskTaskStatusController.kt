@@ -1,9 +1,9 @@
 package com.app.norutin.controller
 
 import com.app.norutin.model.TaskStatus
-import com.app.norutin.model.request.CreateDeskTaskStatusRequest
-import com.app.norutin.model.request.EditDeskTaskStatusRequest
-import com.app.norutin.model.request.GetDeskTaskStatusesRequest
+import com.app.norutin.model.request.create.CreateDeskTaskStatusRequest
+import com.app.norutin.model.request.edit.EditDeskTaskStatusRequest
+import com.app.norutin.model.request.get.GetDeskTaskStatusesRequest
 import com.app.norutin.model.response.ApiError
 import com.app.norutin.model.response.ServerResponse
 import com.app.norutin.service.api.TaskStatusService

@@ -3,9 +3,9 @@ package com.app.norutin.service.api
 import com.app.norutin.entity.DeskValueEntity
 import com.app.norutin.entity.TaskTypeEntity
 import com.app.norutin.model.TaskType
-import com.app.norutin.model.request.CreateDeskTaskTypeRequest
-import com.app.norutin.model.request.EditDeskTaskTypeRequest
-import com.app.norutin.model.request.GetDeskTaskTypesRequest
+import com.app.norutin.model.request.create.CreateDeskTaskTypeRequest
+import com.app.norutin.model.request.edit.EditDeskTaskTypeRequest
+import com.app.norutin.model.request.get.GetDeskTaskTypesRequest
 import java.util.*
 
 interface TaskTypeService {

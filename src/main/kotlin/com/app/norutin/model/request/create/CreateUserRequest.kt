@@ -1,4 +1,4 @@
-package com.app.norutin.model.request
+package com.app.norutin.model.request.create
 
 data class CreateUserRequest(val email: String,
                              val name: String,

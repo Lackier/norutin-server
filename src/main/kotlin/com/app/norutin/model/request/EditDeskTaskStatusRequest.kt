@@ -1,4 +1,3 @@
 package com.app.norutin.model.request
 
-class EditDeskTaskStatusRequest {
-}
+class EditDeskTaskStatusRequest(val id: Int, val name: String)

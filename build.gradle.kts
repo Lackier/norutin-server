@@ -25,6 +25,7 @@ flyway {
     user = "postgres"
     password = "postgres"
     schemas = arrayOf("public")
+    cleanDisabled = true
 }
 
 repositories {

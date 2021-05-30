@@ -4,6 +4,7 @@ import com.app.norutin.entity.DeskValueEntity
 import com.app.norutin.entity.TaskStatusEntity
 import com.app.norutin.entity.def.TaskStatusDefEntity
 import com.app.norutin.model.TaskStatus
+import com.app.norutin.model.request.CreateDeskTaskStatusRequest
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping
 import org.mapstruct.Mappings
@@ -17,4 +18,9 @@ interface TaskStatusMapper {
     fun map(defEntity: TaskStatusDefEntity, deskValueEntity: DeskValueEntity): TaskStatusEntity
 
     fun map(taskStatusEntity: TaskStatusEntity): TaskStatus
+
+    fun map(
+        createDeskTaskStatusRequest: CreateDeskTaskStatusRequest,
+        deskValueEntity: DeskValueEntity
+    ): TaskStatusEntity
 }

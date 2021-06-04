@@ -1,10 +1,7 @@
 package com.app.norutin.controller
 
-import com.app.norutin.model.Desk
 import com.app.norutin.model.Task
-import com.app.norutin.model.request.create.CreateDeskRequest
 import com.app.norutin.model.request.create.CreateTaskRequest
-import com.app.norutin.model.request.edit.EditDeskRequest
 import com.app.norutin.model.request.edit.EditTaskRequest
 import com.app.norutin.model.request.get.GetTasksRequest
 import com.app.norutin.model.response.ApiError
@@ -20,7 +17,6 @@ import java.net.URISyntaxException
 @RestController
 @RequestMapping("/api/tasks")
 @CrossOrigin
-
 class TaskController(
     private val taskService: TaskService
 ) {
@@ -67,7 +63,7 @@ class TaskController(
         return ResponseEntity.ok(ServerResponse(task.get()))
     }
 
-    @DeleteMapping()
+    @DeleteMapping
     @Throws(URISyntaxException::class)
     fun deleteTask(taskId: Int): ResponseEntity<ServerResponse<Int>> {
         val deletedTaskId = taskService.delete(taskId)

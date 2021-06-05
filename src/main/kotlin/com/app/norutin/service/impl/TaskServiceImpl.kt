@@ -11,7 +11,10 @@ import org.springframework.stereotype.Service
 import java.util.*
 import java.util.Optional.empty
 import java.util.Optional.of
+import java.util.function.Function
 import java.util.stream.Collectors
+import kotlin.collections.ArrayList
+
 
 @Service
 class TaskServiceImpl(
@@ -73,5 +76,10 @@ class TaskServiceImpl(
         taskRepository.delete(taskEntity.get())
 
         return of(taskId)
+    }
+
+    override fun getDeskTasksByStatus(deskId: Int, statusId: Int): List<Task> {
+        return getDeskTasks(deskId)
+            .filter { task -> task.statusId == statusId }
     }
 }

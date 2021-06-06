@@ -78,4 +78,8 @@ class PriorityTypeServiceImpl(
 
         priorityTypeRepository.deleteAll(priorityTypeEntities)
     }
+
+    override fun find(priorityId: Int): PriorityTypeEntity {
+        return priorityTypeRepository.findById(priorityId).get()
+    }
 }

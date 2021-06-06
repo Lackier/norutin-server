@@ -4,21 +4,23 @@ import com.app.norutin.mapper.TaskMapper
 import com.app.norutin.model.Task
 import com.app.norutin.model.request.create.CreateTaskRequest
 import com.app.norutin.model.request.edit.EditTaskRequest
+import com.app.norutin.model.response.TaskWithNames
 import com.app.norutin.repo.TaskRepository
-import com.app.norutin.service.api.TaskService
+import com.app.norutin.service.api.*
 import org.mapstruct.factory.Mappers
 import org.springframework.stereotype.Service
 import java.util.*
 import java.util.Optional.empty
 import java.util.Optional.of
-import java.util.function.Function
 import java.util.stream.Collectors
-import kotlin.collections.ArrayList
 
 
 @Service
 class TaskServiceImpl(
-    private val taskRepository: TaskRepository
+    private val taskRepository: TaskRepository,
+    private val taskTypeService: TaskTypeService,
+    private val taskStatusService: TaskStatusService,
+    private val priorityTypeService: PriorityTypeService
 ) : TaskService {
     private val taskMapper: TaskMapper = Mappers.getMapper(TaskMapper::class.java)
 
@@ -59,9 +61,9 @@ class TaskServiceImpl(
         taskEntity.doneDate = editTaskRequest.doneDate!!
         taskEntity.commitDate = editTaskRequest.commitDate!!
         taskEntity.description = editTaskRequest.description!!
-        taskEntity.statusId = editTaskRequest.statusId!!
-        taskEntity.typeId = editTaskRequest.typeId!!
-        taskEntity.priorityId = editTaskRequest.priorityId!!
+        taskEntity.status = taskStatusService.find(editTaskRequest.statusId!!)
+        taskEntity.type = taskTypeService.find(editTaskRequest.typeId!!)
+        taskEntity.priority = priorityTypeService.find(editTaskRequest.priorityId!!)
 
         return of(taskMapper.map(taskRepository.save(taskEntity)))
     }
@@ -76,5 +78,13 @@ class TaskServiceImpl(
         taskRepository.delete(taskEntity.get())
 
         return of(taskId)
+    }
+
+    override fun getDeskTasksWithNames(deskId: Int): List<TaskWithNames> {
+        val taskEntities = taskRepository.findByDeskId(deskId)
+
+        return taskEntities.stream()
+            .map { taskEntity -> taskMapper.mapWithNames(taskEntity) }
+            .collect(Collectors.toList())
     }
 }

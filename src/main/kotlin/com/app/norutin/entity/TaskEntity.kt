@@ -5,7 +5,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "task")
-class TaskEntity(
+open class TaskEntity(
     id: Int?,
 
     @Column(name = "name")
@@ -30,12 +30,15 @@ class TaskEntity(
     @Column(name = "done_on_time")
     open var doneOnTime: Boolean,
 
-    @Column(name = "status_id")
-    open var statusId: Int,
+    @OneToOne(cascade = [CascadeType.ALL])
+    @JoinColumn(name = "status_id")
+    open var status: TaskStatusEntity,
 
-    @Column(name = "type_id")
-    open var typeId: Int,
+    @OneToOne(cascade = [CascadeType.ALL])
+    @JoinColumn(name = "type_id")
+    open var type: TaskTypeEntity,
 
-    @Column(name = "priority_id")
-    open var priorityId: Int
+    @OneToOne(cascade = [CascadeType.ALL])
+    @JoinColumn(name = "priority_id")
+    open var priority: PriorityTypeEntity
 ) : AbstractEntity(id)

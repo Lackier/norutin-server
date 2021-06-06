@@ -6,6 +6,7 @@ import com.app.norutin.model.request.edit.EditTaskRequest
 import com.app.norutin.model.request.get.GetTasksRequest
 import com.app.norutin.model.response.ApiError
 import com.app.norutin.model.response.ServerResponse
+import com.app.norutin.model.response.TaskWithNames
 import com.app.norutin.service.api.TaskService
 import lombok.extern.slf4j.Slf4j
 import org.springframework.http.HttpStatus
@@ -25,6 +26,14 @@ class TaskController(
     @Throws(URISyntaxException::class)
     fun getTasks(getTasksRequest: GetTasksRequest): ResponseEntity<List<Task>> {
         val tasks = taskService.getDeskTasks(getTasksRequest.deskId)
+
+        return ResponseEntity.ok(tasks)
+    }
+
+    @GetMapping("/ofDeskWithNames")
+    @Throws(URISyntaxException::class)
+    fun getTasksOfDeskWithNames(getTasksRequest: GetTasksRequest): ResponseEntity<List<TaskWithNames>> {
+        val tasks = taskService.getDeskTasksWithNames(getTasksRequest.deskId)
 
         return ResponseEntity.ok(tasks)
     }

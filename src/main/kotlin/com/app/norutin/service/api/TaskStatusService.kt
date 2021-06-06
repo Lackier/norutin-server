@@ -15,4 +15,5 @@ interface TaskStatusService {
     fun edit(editDeskTaskStatusRequest: EditDeskTaskStatusRequest): TaskStatus
     fun delete(id: Int): Optional<Int>
     fun deleteAll(deskValueId: Int)
+    fun find(statusId: Int): TaskStatusEntity
 }

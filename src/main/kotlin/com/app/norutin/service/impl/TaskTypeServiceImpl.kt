@@ -1,6 +1,7 @@
 package com.app.norutin.service.impl
 
 import com.app.norutin.entity.DeskValueEntity
+import com.app.norutin.entity.TaskStatusEntity
 import com.app.norutin.entity.TaskTypeEntity
 import com.app.norutin.mapper.TaskTypeMapper
 import com.app.norutin.model.TaskType
@@ -46,19 +47,19 @@ class TaskTypeServiceImpl(
     override fun create(createDeskTaskTypeRequest: CreateDeskTaskTypeRequest): TaskType {
         val deskValue = deskValueRepository.getByDeskId(createDeskTaskTypeRequest.deskId)
 
-        var priorityTypeEntity = taskTypeMapper.map(createDeskTaskTypeRequest, deskValue)
-        priorityTypeEntity = taskTypeRepository.save(priorityTypeEntity)
+        var taskTypeEntity = taskTypeMapper.map(createDeskTaskTypeRequest, deskValue)
+        taskTypeEntity = taskTypeRepository.save(taskTypeEntity)
 
-        return taskTypeMapper.map(priorityTypeEntity)
+        return taskTypeMapper.map(taskTypeEntity)
     }
 
     override fun edit(editDeskTaskTypeRequest: EditDeskTaskTypeRequest): TaskType {
-        var priorityTypeEntity = taskTypeRepository.findById(editDeskTaskTypeRequest.id).get()
-        priorityTypeEntity.name = editDeskTaskTypeRequest.name
+        var taskTypeEntity = taskTypeRepository.findById(editDeskTaskTypeRequest.id).get()
+        taskTypeEntity.name = editDeskTaskTypeRequest.name
 
-        priorityTypeEntity = taskTypeRepository.save(priorityTypeEntity)
+        taskTypeEntity = taskTypeRepository.save(taskTypeEntity)
 
-        return taskTypeMapper.map(priorityTypeEntity)
+        return taskTypeMapper.map(taskTypeEntity)
     }
 
     override fun delete(id: Int): Optional<Int> {
@@ -77,5 +78,9 @@ class TaskTypeServiceImpl(
         val taskTypeEntities = taskTypeRepository.getByDeskValueId(deskValueId)
 
         taskTypeRepository.deleteAll(taskTypeEntities)
+    }
+
+    override fun find(typeId: Int): TaskTypeEntity {
+        return taskTypeRepository.findById(typeId).get()
     }
 }

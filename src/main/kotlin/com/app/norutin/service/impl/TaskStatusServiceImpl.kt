@@ -1,6 +1,7 @@
 package com.app.norutin.service.impl
 
 import com.app.norutin.entity.DeskValueEntity
+import com.app.norutin.entity.PriorityTypeEntity
 import com.app.norutin.entity.TaskStatusEntity
 import com.app.norutin.mapper.TaskStatusMapper
 import com.app.norutin.model.TaskStatus
@@ -46,19 +47,19 @@ class TaskStatusServiceImpl(
     override fun create(createDeskTaskStatusRequest: CreateDeskTaskStatusRequest): TaskStatus {
         val deskValue = deskValueRepository.getByDeskId(createDeskTaskStatusRequest.deskId)
 
-        var priorityTypeEntity = taskStatusMapper.map(createDeskTaskStatusRequest, deskValue)
-        priorityTypeEntity = taskStatusRepository.save(priorityTypeEntity)
+        var taskStatusEntity = taskStatusMapper.map(createDeskTaskStatusRequest, deskValue)
+        taskStatusEntity = taskStatusRepository.save(taskStatusEntity)
 
-        return taskStatusMapper.map(priorityTypeEntity)
+        return taskStatusMapper.map(taskStatusEntity)
     }
 
     override fun edit(editDeskTaskStatusRequest: EditDeskTaskStatusRequest): TaskStatus {
-        var priorityTypeEntity = taskStatusRepository.findById(editDeskTaskStatusRequest.id).get()
-        priorityTypeEntity.name = editDeskTaskStatusRequest.name
+        var taskStatusEntity = taskStatusRepository.findById(editDeskTaskStatusRequest.id).get()
+        taskStatusEntity.name = editDeskTaskStatusRequest.name
 
-        priorityTypeEntity = taskStatusRepository.save(priorityTypeEntity)
+        taskStatusEntity = taskStatusRepository.save(taskStatusEntity)
 
-        return taskStatusMapper.map(priorityTypeEntity)
+        return taskStatusMapper.map(taskStatusEntity)
     }
 
     override fun delete(id: Int): Optional<Int> {
@@ -77,5 +78,9 @@ class TaskStatusServiceImpl(
         val taskStatusEntities = taskStatusRepository.getByDeskValueId(deskValueId)
 
         taskStatusRepository.deleteAll(taskStatusEntities)
+    }
+
+    override fun find(statusId: Int): TaskStatusEntity {
+        return taskStatusRepository.findById(statusId).get()
     }
 }

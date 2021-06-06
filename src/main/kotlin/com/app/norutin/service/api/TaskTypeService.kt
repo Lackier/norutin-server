@@ -15,4 +15,5 @@ interface TaskTypeService {
     fun edit(editDeskTaskTypeRequest: EditDeskTaskTypeRequest): TaskType
     fun delete(id: Int): Optional<Int>
     fun deleteAll(deskValueId: Int)
+    fun find(typeId: Int): TaskTypeEntity
 }

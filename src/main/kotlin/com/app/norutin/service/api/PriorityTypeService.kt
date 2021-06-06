@@ -15,4 +15,5 @@ interface PriorityTypeService {
     fun edit(editDeskPriorityTypeRequest: EditDeskPriorityTypeRequest): TaskPriority
     fun delete(id: Int): Optional<Int>
     fun deleteAll(deskValueId: Int)
+    fun find(priorityId: Int): PriorityTypeEntity
 }

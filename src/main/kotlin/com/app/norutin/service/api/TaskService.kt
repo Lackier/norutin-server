@@ -11,5 +11,4 @@ interface TaskService {
     fun create(createTaskRequest: CreateTaskRequest): Task
     fun edit(editTaskRequest: EditTaskRequest): Optional<Task>
     fun delete(taskId: Int): Optional<Int>
-    fun getDeskTasksByStatus(deskId: Int, statusId: Int): List<Task>
 }

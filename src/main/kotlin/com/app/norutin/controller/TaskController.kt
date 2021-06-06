@@ -4,7 +4,6 @@ import com.app.norutin.model.Task
 import com.app.norutin.model.request.create.CreateTaskRequest
 import com.app.norutin.model.request.edit.EditTaskRequest
 import com.app.norutin.model.request.get.GetTasksRequest
-import com.app.norutin.model.request.get.GetTasksWithStatusRequest
 import com.app.norutin.model.response.ApiError
 import com.app.norutin.model.response.ServerResponse
 import com.app.norutin.service.api.TaskService
@@ -26,14 +25,6 @@ class TaskController(
     @Throws(URISyntaxException::class)
     fun getTasks(getTasksRequest: GetTasksRequest): ResponseEntity<List<Task>> {
         val tasks = taskService.getDeskTasks(getTasksRequest.deskId)
-
-        return ResponseEntity.ok(tasks)
-    }
-
-    @GetMapping("/getByStatus")
-    @Throws(URISyntaxException::class)
-    fun getTasksByStatus(getTasksWithStatusRequest: GetTasksWithStatusRequest): ResponseEntity<List<Task>> {
-        val tasks = taskService.getDeskTasksByStatus(getTasksWithStatusRequest.deskId, getTasksWithStatusRequest.statusId)
 
         return ResponseEntity.ok(tasks)
     }

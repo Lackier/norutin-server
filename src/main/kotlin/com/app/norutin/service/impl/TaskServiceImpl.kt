@@ -77,9 +77,4 @@ class TaskServiceImpl(
 
         return of(taskId)
     }
-
-    override fun getDeskTasksByStatus(deskId: Int, statusId: Int): List<Task> {
-        return getDeskTasks(deskId)
-            .filter { task -> task.statusId == statusId }
-    }
 }

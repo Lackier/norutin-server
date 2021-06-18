@@ -1,5 +1,6 @@
 package com.app.norutin.service.impl
 
+import com.app.norutin.entity.DeskEntity
 import com.app.norutin.mapper.DeskMapper
 import com.app.norutin.mapper.UserMapper
 import com.app.norutin.model.Desk
@@ -82,5 +83,9 @@ class DeskServiceImpl(
         deskRepository.delete(deskEntity.get())
 
         return of(deskId)
+    }
+
+    override fun find(deskId: Int): DeskEntity {
+        return deskRepository.findById(deskId).get()
     }
 }

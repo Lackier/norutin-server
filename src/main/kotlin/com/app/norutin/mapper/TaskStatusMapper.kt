@@ -19,6 +19,9 @@ interface TaskStatusMapper {
 
     fun map(taskStatusEntity: TaskStatusEntity): TaskStatus
 
+    @Mappings(
+        Mapping(target = "deskValue", source = "deskValueEntity")
+    )
     fun map(
         createDeskTaskStatusRequest: CreateDeskTaskStatusRequest,
         deskValueEntity: DeskValueEntity

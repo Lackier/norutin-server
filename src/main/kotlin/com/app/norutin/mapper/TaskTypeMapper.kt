@@ -19,6 +19,9 @@ interface TaskTypeMapper {
 
     fun map(taskTypeEntity: TaskTypeEntity): TaskType
 
+    @Mappings(
+        Mapping(target = "deskValue", source = "deskValueEntity")
+    )
     fun map(
         createDeskTaskTypeRequest: CreateDeskTaskTypeRequest,
         deskValueEntity: DeskValueEntity

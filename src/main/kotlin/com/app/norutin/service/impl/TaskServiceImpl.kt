@@ -20,7 +20,8 @@ class TaskServiceImpl(
     private val taskRepository: TaskRepository,
     private val taskTypeService: TaskTypeService,
     private val taskStatusService: TaskStatusService,
-    private val priorityTypeService: PriorityTypeService
+    private val priorityTypeService: PriorityTypeService,
+    private val deskService: DeskService
 ) : TaskService {
     private val taskMapper: TaskMapper = Mappers.getMapper(TaskMapper::class.java)
 
@@ -45,7 +46,13 @@ class TaskServiceImpl(
         val newTask = taskMapper.map(createTaskRequest)
         newTask.createDate = Date()
 
-        val taskEntity = taskRepository.save(taskMapper.map(newTask))
+        var taskEntity = taskMapper.map(newTask)
+        taskEntity.desk = deskService.find(newTask.deskId)
+        taskEntity.status = taskStatusService.find(newTask.statusId!!)
+        taskEntity.type = taskTypeService.find(newTask.typeId!!)
+        taskEntity.priority = priorityTypeService.find(newTask.priorityId!!)
+
+        taskEntity = taskRepository.save(taskEntity)
         return taskMapper.map(taskEntity)
     }
 
@@ -58,8 +65,12 @@ class TaskServiceImpl(
 
         val taskEntity = taskEntityOpt.get()
         taskEntity.name = editTaskRequest.name
-        taskEntity.doneDate = editTaskRequest.doneDate!!
-        taskEntity.commitDate = editTaskRequest.commitDate!!
+        if (editTaskRequest.doneDate != null && editTaskRequest.doneDate!!.time != 0L) {
+            taskEntity.doneDate = editTaskRequest.doneDate
+        }
+        if (editTaskRequest.commitDate != null && editTaskRequest.commitDate!!.time != 0L) {
+            taskEntity.commitDate = editTaskRequest.commitDate
+        }
         taskEntity.description = editTaskRequest.description!!
         taskEntity.status = taskStatusService.find(editTaskRequest.statusId!!)
         taskEntity.type = taskTypeService.find(editTaskRequest.typeId!!)

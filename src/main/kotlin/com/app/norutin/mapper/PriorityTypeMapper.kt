@@ -19,6 +19,9 @@ interface PriorityTypeMapper {
 
     fun map(priorityTypeEntity: PriorityTypeEntity): TaskPriority
 
+    @Mappings(
+        Mapping(target = "deskValue", source = "deskValueEntity")
+    )
     fun map(
         createDeskPriorityTypeRequest: CreateDeskPriorityTypeRequest,
         deskValueEntity: DeskValueEntity

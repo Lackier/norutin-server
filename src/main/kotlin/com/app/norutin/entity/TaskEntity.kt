@@ -15,10 +15,10 @@ open class TaskEntity(
     open var createDate: Date,
 
     @Column(name = "done_dt")
-    open var doneDate: Date,
+    open var doneDate: Date?,
 
     @Column(name = "commit_dt")
-    open var commitDate: Date,
+    open var commitDate: Date?,
 
     @ManyToOne
     @JoinColumn(name = "desk_id", referencedColumnName = "id")
@@ -28,17 +28,17 @@ open class TaskEntity(
     open var description: String,
 
     @Column(name = "done_on_time")
-    open var doneOnTime: Boolean,
+    open var doneOnTime: Boolean?,
 
     @OneToOne(cascade = [CascadeType.ALL])
     @JoinColumn(name = "status_id")
-    open var status: TaskStatusEntity,
+    open var status: TaskStatusEntity?,
 
     @OneToOne(cascade = [CascadeType.ALL])
     @JoinColumn(name = "type_id")
-    open var type: TaskTypeEntity,
+    open var type: TaskTypeEntity?,
 
     @OneToOne(cascade = [CascadeType.ALL])
     @JoinColumn(name = "priority_id")
-    open var priority: PriorityTypeEntity
+    open var priority: PriorityTypeEntity?
 ) : AbstractEntity(id)

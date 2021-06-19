@@ -8,9 +8,9 @@ import java.util.*
 
 interface TaskService {
     fun getDeskTasks(deskId: Int): List<Task>
-    fun getTask(taskId: Int): Optional<Task>
+    fun getTask(id: Int): Optional<Task>
     fun create(createTaskRequest: CreateTaskRequest): Task
     fun edit(editTaskRequest: EditTaskRequest): Optional<Task>
-    fun delete(taskId: Int): Optional<Int>
+    fun delete(id: Int): Optional<Int>
     fun getDeskTasksWithNames(deskId: Int): List<TaskWithNames>
 }

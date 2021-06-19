@@ -40,11 +40,11 @@ class TaskController(
 
     @GetMapping("/get")
     @Throws(URISyntaxException::class)
-    fun getTask(taskId: Int): ResponseEntity<ServerResponse<Task>> {
-        val task = taskService.getTask(taskId)
+    fun getTask(id: Int): ResponseEntity<ServerResponse<Task>> {
+        val task = taskService.getTask(id)
 
         if (task.isEmpty) {
-            val apiError = ApiError(HttpStatus.NOT_FOUND, "No task found with id: $taskId")
+            val apiError = ApiError(HttpStatus.NOT_FOUND, "No task found with id: $id")
             return ResponseEntity.ok(ServerResponse(apiError))
         }
 
@@ -74,11 +74,11 @@ class TaskController(
 
     @DeleteMapping
     @Throws(URISyntaxException::class)
-    fun deleteTask(taskId: Int): ResponseEntity<ServerResponse<Int>> {
-        val deletedTaskId = taskService.delete(taskId)
+    fun deleteTask(id: Int): ResponseEntity<ServerResponse<Int>> {
+        val deletedTaskId = taskService.delete(id)
 
         if (deletedTaskId.isEmpty) {
-            val apiError = ApiError(HttpStatus.NOT_FOUND, "No task found with id: $taskId")
+            val apiError = ApiError(HttpStatus.NOT_FOUND, "No task found with id: $id")
             return ResponseEntity.ok(ServerResponse(apiError))
         }
 

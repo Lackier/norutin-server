@@ -33,8 +33,8 @@ class TaskServiceImpl(
             .collect(Collectors.toList())
     }
 
-    override fun getTask(taskId: Int): Optional<Task> {
-        val taskEntity = taskRepository.findById(taskId)
+    override fun getTask(id: Int): Optional<Task> {
+        val taskEntity = taskRepository.findById(id)
         if (taskEntity.isEmpty) {
             return empty()
         }
@@ -79,8 +79,8 @@ class TaskServiceImpl(
         return of(taskMapper.map(taskRepository.save(taskEntity)))
     }
 
-    override fun delete(taskId: Int): Optional<Int> {
-        val taskEntity = taskRepository.findById(taskId)
+    override fun delete(id: Int): Optional<Int> {
+        val taskEntity = taskRepository.findById(id)
 
         if (taskEntity.isEmpty) {
             return empty()
@@ -88,7 +88,7 @@ class TaskServiceImpl(
 
         taskRepository.delete(taskEntity.get())
 
-        return of(taskId)
+        return of(id)
     }
 
     override fun getDeskTasksWithNames(deskId: Int): List<TaskWithNames> {

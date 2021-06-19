@@ -30,15 +30,15 @@ open class TaskEntity(
     @Column(name = "done_on_time")
     open var doneOnTime: Boolean?,
 
-    @OneToOne(cascade = [CascadeType.ALL])
+    @OneToOne(cascade = [CascadeType.MERGE])
     @JoinColumn(name = "status_id")
     open var status: TaskStatusEntity?,
 
-    @OneToOne(cascade = [CascadeType.ALL])
+    @OneToOne(cascade = [CascadeType.MERGE])
     @JoinColumn(name = "type_id")
     open var type: TaskTypeEntity?,
 
-    @OneToOne(cascade = [CascadeType.ALL])
+    @OneToOne(cascade = [CascadeType.MERGE])
     @JoinColumn(name = "priority_id")
     open var priority: PriorityTypeEntity?
 ) : AbstractEntity(id)

@@ -3,6 +3,7 @@ package com.app.norutin.config
 import com.app.norutin.security.FirebaseAuthTokenFilter
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.config.http.SessionCreationPolicy
@@ -32,6 +33,21 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
         http.addFilterBefore(
             firebaseAuthenticationFilterBean(),
             UsernamePasswordAuthenticationFilter::class.java
+        )
+    }
+
+    @Throws(Exception::class)
+    override fun configure(web: WebSecurity) {
+        web.ignoring().antMatchers(
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+            "/v3/api-docs/**",
+            "/swagger-ui/**"
         )
     }
 }

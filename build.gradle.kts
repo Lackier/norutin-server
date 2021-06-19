@@ -47,6 +47,8 @@ dependencies {
 
     kapt("org.mapstruct:mapstruct-processor:1.4.2.Final")
     compile("org.postgresql:postgresql:42.2.6")
+    compile("io.springfox:springfox-swagger2:3.0.0")
+    compile("io.springfox:springfox-swagger-ui:3.0.0")
     compileOnly("org.projectlombok:lombok")
 
     runtimeOnly("org.postgresql:postgresql")

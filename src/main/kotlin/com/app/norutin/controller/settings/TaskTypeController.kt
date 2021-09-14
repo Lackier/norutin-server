@@ -1,4 +1,4 @@
-package com.app.norutin.controller
+package com.app.norutin.controller.settings
 
 import com.app.norutin.model.TaskType
 import com.app.norutin.model.request.create.CreateDeskTaskTypeRequest
@@ -15,9 +15,9 @@ import java.net.URISyntaxException
 
 @Slf4j
 @RestController
-@RequestMapping("/api/deskTaskType")
+@RequestMapping("/api/taskType")
 @CrossOrigin
-class DeskTaskTypeController(
+class TaskTypeController(
     private val taskTypeService: TaskTypeService
 ) {
     @GetMapping

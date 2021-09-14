@@ -1,4 +1,4 @@
-package com.app.norutin.controller
+package com.app.norutin.controller.user
 
 import com.app.norutin.mapper.UserMapper
 import com.app.norutin.model.User

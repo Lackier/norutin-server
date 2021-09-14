@@ -1,7 +1,7 @@
 package com.app.norutin.mapper
 
-import com.app.norutin.entity.DeskValueEntity
-import com.app.norutin.entity.TaskStatusEntity
+import com.app.norutin.entity.settings.DeskValueEntity
+import com.app.norutin.entity.settings.TaskStatusEntity
 import com.app.norutin.entity.def.TaskStatusDefEntity
 import com.app.norutin.model.TaskStatus
 import com.app.norutin.model.request.create.CreateDeskTaskStatusRequest

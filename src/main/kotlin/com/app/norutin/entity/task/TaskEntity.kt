@@ -1,5 +1,10 @@
-package com.app.norutin.entity
+package com.app.norutin.entity.task
 
+import com.app.norutin.entity.AbstractEntity
+import com.app.norutin.entity.desk.DeskEntity
+import com.app.norutin.entity.settings.PriorityTypeEntity
+import com.app.norutin.entity.settings.TaskStatusEntity
+import com.app.norutin.entity.settings.TaskTypeEntity
 import java.util.*
 import javax.persistence.*
 

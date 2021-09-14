@@ -1,6 +1,8 @@
-package com.app.norutin.entity
+package com.app.norutin.entity.settings
 
-import javax.persistence.*
+import com.app.norutin.entity.AbstractDeskSettingEntity
+import javax.persistence.Entity
+import javax.persistence.Table
 
 @Entity
 @Table(name = "priority_type")

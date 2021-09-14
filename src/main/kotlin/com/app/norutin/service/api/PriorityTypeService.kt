@@ -1,7 +1,7 @@
 package com.app.norutin.service.api
 
-import com.app.norutin.entity.DeskValueEntity
-import com.app.norutin.entity.PriorityTypeEntity
+import com.app.norutin.entity.settings.DeskValueEntity
+import com.app.norutin.entity.settings.PriorityTypeEntity
 import com.app.norutin.model.TaskPriority
 import com.app.norutin.model.request.create.CreateDeskPriorityTypeRequest
 import com.app.norutin.model.request.edit.EditDeskPriorityTypeRequest

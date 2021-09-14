@@ -1,4 +1,4 @@
-package com.app.norutin.controller
+package com.app.norutin.controller.settings
 
 import com.app.norutin.model.TaskStatus
 import com.app.norutin.model.request.create.CreateDeskTaskStatusRequest
@@ -15,9 +15,9 @@ import java.net.URISyntaxException
 
 @Slf4j
 @RestController
-@RequestMapping("/api/deskTaskStatus")
+@RequestMapping("/api/taskStatus")
 @CrossOrigin
-class DeskTaskStatusController(
+class TaskStatusController(
     private val taskStatusService: TaskStatusService
 ) {
     @GetMapping

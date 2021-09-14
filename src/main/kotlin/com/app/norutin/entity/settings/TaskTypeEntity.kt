@@ -1,5 +1,6 @@
-package com.app.norutin.entity
+package com.app.norutin.entity.settings
 
+import com.app.norutin.entity.AbstractDeskSettingEntity
 import javax.persistence.*
 
 @Entity

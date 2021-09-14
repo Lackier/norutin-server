@@ -1,4 +1,4 @@
-package com.app.norutin.controller
+package com.app.norutin.controller.task
 
 import com.app.norutin.model.Task
 import com.app.norutin.model.request.create.CreateTaskRequest

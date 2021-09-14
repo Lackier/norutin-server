@@ -1,7 +1,7 @@
 package com.app.norutin.service.impl
 
-import com.app.norutin.entity.DeskEntity
-import com.app.norutin.entity.DeskValueEntity
+import com.app.norutin.entity.desk.DeskEntity
+import com.app.norutin.entity.settings.DeskValueEntity
 import com.app.norutin.repo.DeskValueRepository
 import com.app.norutin.service.api.PriorityTypeService
 import com.app.norutin.service.api.DeskSettingsService

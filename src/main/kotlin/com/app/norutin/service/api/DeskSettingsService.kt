@@ -1,7 +1,7 @@
 package com.app.norutin.service.api
 
-import com.app.norutin.entity.DeskEntity
-import com.app.norutin.entity.DeskValueEntity
+import com.app.norutin.entity.desk.DeskEntity
+import com.app.norutin.entity.settings.DeskValueEntity
 
 interface DeskSettingsService {
     fun createDefaultSettings(deskId: Int)

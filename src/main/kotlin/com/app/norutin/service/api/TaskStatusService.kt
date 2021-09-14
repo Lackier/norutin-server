@@ -1,7 +1,7 @@
 package com.app.norutin.service.api
 
-import com.app.norutin.entity.DeskValueEntity
-import com.app.norutin.entity.TaskStatusEntity
+import com.app.norutin.entity.settings.DeskValueEntity
+import com.app.norutin.entity.settings.TaskStatusEntity
 import com.app.norutin.model.TaskStatus
 import com.app.norutin.model.request.create.CreateDeskTaskStatusRequest
 import com.app.norutin.model.request.edit.EditDeskTaskStatusRequest

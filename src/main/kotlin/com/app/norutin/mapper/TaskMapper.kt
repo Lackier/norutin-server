@@ -1,6 +1,6 @@
 package com.app.norutin.mapper
 
-import com.app.norutin.entity.TaskEntity
+import com.app.norutin.entity.task.TaskEntity
 import com.app.norutin.model.Task
 import com.app.norutin.model.request.create.CreateTaskRequest
 import com.app.norutin.model.response.TaskWithNames

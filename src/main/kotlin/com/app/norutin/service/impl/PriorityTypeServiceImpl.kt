@@ -1,7 +1,7 @@
 package com.app.norutin.service.impl
 
-import com.app.norutin.entity.DeskValueEntity
-import com.app.norutin.entity.PriorityTypeEntity
+import com.app.norutin.entity.settings.DeskValueEntity
+import com.app.norutin.entity.settings.PriorityTypeEntity
 import com.app.norutin.mapper.PriorityTypeMapper
 import com.app.norutin.model.TaskPriority
 import com.app.norutin.model.request.create.CreateDeskPriorityTypeRequest
@@ -37,6 +37,7 @@ class PriorityTypeServiceImpl(
     override fun getForDesk(getDeskPriorityTypesRequest: GetDeskPriorityTypesRequest): List<TaskPriority> {
         val deskValueId = deskValueRepository.getByDeskId(getDeskPriorityTypesRequest.deskId).getId()
         val priorityTypeEntities = priorityTypeRepository.getByDeskValueId(deskValueId!!)
+            .sortedBy { i -> i.getId() }
 
         return priorityTypeEntities.stream()
             .map { priorityTypeEntity -> priorityTypeMapper.map(priorityTypeEntity) }

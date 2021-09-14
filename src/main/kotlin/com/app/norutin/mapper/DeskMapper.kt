@@ -1,6 +1,6 @@
 package com.app.norutin.mapper
 
-import com.app.norutin.entity.DeskEntity
+import com.app.norutin.entity.desk.DeskEntity
 import com.app.norutin.model.Desk
 import com.app.norutin.model.request.create.CreateDeskRequest
 import com.app.norutin.model.request.edit.EditDeskRequest

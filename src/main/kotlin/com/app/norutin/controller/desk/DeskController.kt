@@ -1,4 +1,4 @@
-package com.app.norutin.controller
+package com.app.norutin.controller.desk
 
 import com.app.norutin.model.Desk
 import com.app.norutin.model.request.create.CreateDeskRequest

@@ -1,5 +1,6 @@
 package com.app.norutin.entity
 
+import com.app.norutin.entity.settings.DeskValueEntity
 import javax.persistence.Column
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne

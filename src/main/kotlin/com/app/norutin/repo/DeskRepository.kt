@@ -1,7 +1,7 @@
 package com.app.norutin.repo
 
-import com.app.norutin.entity.DeskEntity
-import com.app.norutin.entity.UserEntity
+import com.app.norutin.entity.desk.DeskEntity
+import com.app.norutin.entity.user.UserEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 import java.util.*

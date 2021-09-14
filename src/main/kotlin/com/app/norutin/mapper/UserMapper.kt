@@ -1,6 +1,6 @@
 package com.app.norutin.mapper
 
-import com.app.norutin.entity.UserEntity
+import com.app.norutin.entity.user.UserEntity
 import com.app.norutin.model.User
 import com.app.norutin.model.request.create.CreateUserRequest
 import org.mapstruct.*

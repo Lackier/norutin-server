@@ -1,4 +1,4 @@
-package com.app.norutin.controller
+package com.app.norutin.controller.settings
 
 import com.app.norutin.model.TaskPriority
 import com.app.norutin.model.request.create.CreateDeskPriorityTypeRequest
@@ -15,9 +15,9 @@ import java.net.URISyntaxException
 
 @Slf4j
 @RestController
-@RequestMapping("/api/deskPriorityType")
+@RequestMapping("/api/priorityType")
 @CrossOrigin
-class DeskPriorityTypesController(
+class PriorityTypeController(
     private val priorityTypeService: PriorityTypeService
 ) {
     @GetMapping

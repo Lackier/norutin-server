@@ -14,10 +14,12 @@ import javax.servlet.http.HttpServletRequest
 
 @Component
 class JwtTokenProvider(
-        @Lazy val userDetailServiceImpl: JwtUserDetailServiceImpl) {
+    @Lazy val userDetailServiceImpl: JwtUserDetailServiceImpl
+) {
 
     private var secret = "secret"
     private val validityInMilliseconds = 3600000
+    private var tokens: MutableList<String> = mutableListOf()
 
     @PostConstruct
     protected fun init() {
@@ -30,13 +32,16 @@ class JwtTokenProvider(
 
         val now = Date()
         val validity = Date(now.time + validityInMilliseconds)
+        val token = Jwts.builder()
+            .setClaims(claims)
+            .setIssuedAt(Date())
+            .setExpiration(validity)
+            .signWith(SignatureAlgorithm.HS256, secret)
+            .compact()
 
-        return Jwts.builder()
-                .setClaims(claims)
-                .setIssuedAt(Date())
-                .setExpiration(validity)
-                .signWith(SignatureAlgorithm.HS256, secret)
-                .compact()
+        tokens.add(token)
+
+        return token
     }
 
     fun getAuthentication(token: String): Authentication {
@@ -46,9 +51,9 @@ class JwtTokenProvider(
 
     fun getUsernameFromToken(token: String): String {
         return Jwts.parser()
-                .setSigningKey(secret)
-                .parseClaimsJws(token)
-                .body.subject
+            .setSigningKey(secret)
+            .parseClaimsJws(token)
+            .body.subject
     }
 
     fun resolveToken(req: HttpServletRequest): String? {
@@ -59,6 +64,10 @@ class JwtTokenProvider(
     }
 
     fun validateToken(token: String): Boolean {
+        if (!tokens.contains(token)) {
+            throw JwtAuthenticationException("JWT token is expired or invalid")
+        }
+
         return try {
             val claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token)
             !claims.body.expiration.before(Date())
@@ -73,5 +82,10 @@ class JwtTokenProvider(
         userRoles.forEach { role -> result.add(role.name) }
 
         return result
+    }
+
+    fun logout(request: HttpServletRequest) {
+        val token = this.resolveToken(request)
+        tokens.remove(token)
     }
 }

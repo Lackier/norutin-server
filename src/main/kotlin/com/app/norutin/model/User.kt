@@ -1,5 +1,9 @@
 package com.app.norutin.model
 
-import java.util.*
+data class User(val username: String,
+                val password: String,
+                val phone: String,
+                val email: String,
+                val roles: List<Role>,
 
-data class User (val id: Int?, var name: String, var createDate: Date?, var oid: String?)
+                val id: Int? = null)

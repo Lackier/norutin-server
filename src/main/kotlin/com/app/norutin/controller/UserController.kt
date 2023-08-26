@@ -1,58 +1,53 @@
 package com.app.norutin.controller
 
-import com.app.norutin.mapper.UserMapper
 import com.app.norutin.model.User
-import com.app.norutin.model.request.CreateUserRequest
-import com.app.norutin.security.SecurityService
+import com.app.norutin.model.request.LoginRequest
+import com.app.norutin.model.request.SignUpRequest
+import com.app.norutin.model.response.LoginResponse
+import com.app.norutin.security.jwt.JwtTokenProvider
 import com.app.norutin.service.api.UserService
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthException
-import com.google.firebase.auth.UserRecord
 import lombok.extern.slf4j.Slf4j
-import org.mapstruct.factory.Mappers
-import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
-import java.net.URI
-import java.net.URISyntaxException
+import org.springframework.security.authentication.AuthenticationManager
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.web.bind.annotation.*
 
 
 @Slf4j
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin
 class UserController(
-    private val userService: UserService
+    private val userService: UserService,
+    private val authenticationManager: AuthenticationManager,
+    private val jwtTokenProvider: JwtTokenProvider
 ) {
-    private val userMapper: UserMapper = Mappers.getMapper(UserMapper::class.java)
+    @PostMapping("/login")
+    fun login(@RequestBody loginRequest: LoginRequest): LoginResponse {
+        authenticationManager.authenticate(
+            UsernamePasswordAuthenticationToken(
+                loginRequest.username,
+                loginRequest.password
+            )
+        )
+
+        val user = userService.findByUserName(loginRequest.username)!!
+        val roles = user.roles
+        val token = jwtTokenProvider.createToken(loginRequest.username, roles)
+
+        return LoginResponse(
+            user,
+            token
+        )
+    }
 
     @PostMapping("/signup")
-    @Throws(URISyntaxException::class)
-    fun createAccount(@RequestBody createUserRequest: CreateUserRequest): ResponseEntity<String> {
-        val request: UserRecord.CreateRequest = UserRecord.CreateRequest()
-            .setEmail(createUserRequest.email)
-            .setPassword(createUserRequest.password)
-            .setPhoneNumber(createUserRequest.phoneNumber)
-            .setDisplayName(createUserRequest.name)
+    fun signUp(@RequestBody signUpRequest: SignUpRequest): User {
+        return userService.register(signUpRequest);
+    }
 
-        val userRecord: UserRecord
-        try {
-            userRecord = FirebaseAuth.getInstance().createUser(request)
-        } catch (e: FirebaseAuthException) {
-            return ResponseEntity.badRequest().body("Account already exists")
-        }
-
-        return try {
-            val user = userMapper.map(createUserRequest)
-            user.oid = userRecord.uid
-
-            val result: User = userService.save(user)
-
-            ResponseEntity.created(URI("/api/users/" + result.oid)).body(result.oid)
-        } catch (e: Exception) {
-            FirebaseAuth.getInstance().deleteUser(userRecord.uid)
-            ResponseEntity.badRequest().body("Error creating account")
-        }
+    @GetMapping("/profile")
+    fun profile(): User {
+        return userService.findByUserName(SecurityContextHolder.getContext().authentication.name)!!
     }
 }

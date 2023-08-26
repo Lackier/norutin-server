@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") version "2.5.0-SNAPSHOT"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
+    id("org.flywaydb.flyway") version "6.0.0-beta2"
     war
     kotlin("jvm") version "1.4.30"
     kotlin("plugin.spring") version "1.4.30"
@@ -19,10 +20,18 @@ configurations {
     }
 }
 
+flyway {
+    url = "jdbc:postgresql://localhost:5432/norutin-db"
+    user = "postgres"
+    password = "postgres"
+    schemas = arrayOf("public")
+    cleanDisabled = true
+}
+
 repositories {
-    mavenCentral()
     maven { url = uri("https://repo.spring.io/milestone") }
     maven { url = uri("https://repo.spring.io/snapshot") }
+    mavenCentral()
 }
 
 dependencies {
@@ -32,15 +41,20 @@ dependencies {
     implementation("org.flywaydb:flyway-core")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("com.google.firebase:firebase-admin:7.1.1")
     implementation("org.mapstruct:mapstruct:1.4.2.Final")
+    implementation("org.jeasy:easy-random-core:5.0.0")
+    implementation("io.jsonwebtoken:jjwt:0.2")
+    implementation("io.springfox:springfox-swagger-ui:3.0.0")
+    implementation("io.springfox:springfox-swagger2:3.0.0")
+    implementation("org.springdoc:springdoc-openapi-ui:1.5.0")
+    implementation("org.springdoc:springdoc-openapi-data-rest:1.5.0")
+    implementation("org.springdoc:springdoc-openapi-kotlin:1.5.0")
 
     kapt("org.mapstruct:mapstruct-processor:1.4.2.Final")
+    compile("org.postgresql:postgresql:42.2.6")
     compileOnly("org.projectlombok:lombok")
 
     runtimeOnly("org.postgresql:postgresql")
-    /*annotationProcessor("org.projectlombok:lombok")
-    annotationProcessor("org.mapstruct:mapstruct-processor:1.4.2.Final")*/
 
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 

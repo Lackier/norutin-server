@@ -126,7 +126,7 @@ CREATE TABLE "periodicity_type_def"
     "id"   serial       NOT NULL,
     "code" varchar(255) NOT NULL,
     "name" varchar(255) NOT NULL,
-    CONSTRAINT "periodicy_type_def_pk" PRIMARY KEY ("id")
+    CONSTRAINT "periodicity_type_def_pk" PRIMARY KEY ("id")
 );
 
 CREATE TABLE "event_type_def"

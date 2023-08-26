@@ -27,9 +27,9 @@ class DeskSettingsServiceImpl(
     override fun deleteAll(deskId: Int) {
         val deskValueEntity = deskValueRepository.getByDeskId(deskId)
 
-        taskTypeService.deleteAll(deskValueEntity.getId()!!)
-        taskStatusService.deleteAll(deskValueEntity.getId()!!)
-        priorityTypeService.deleteAll(deskValueEntity.getId()!!)
+        taskTypeService.deleteAll(deskValueEntity.id!!)
+        taskStatusService.deleteAll(deskValueEntity.id!!)
+        priorityTypeService.deleteAll(deskValueEntity.id!!)
 
         deskValueRepository.delete(deskValueEntity)
     }

@@ -29,9 +29,9 @@ flyway {
 }
 
 repositories {
-    mavenCentral()
     maven { url = uri("https://repo.spring.io/milestone") }
     maven { url = uri("https://repo.spring.io/snapshot") }
+    mavenCentral()
 }
 
 dependencies {
@@ -41,14 +41,17 @@ dependencies {
     implementation("org.flywaydb:flyway-core")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("com.google.firebase:firebase-admin:7.1.1")
     implementation("org.mapstruct:mapstruct:1.4.2.Final")
-    implementation ("org.jeasy:easy-random-core:5.0.0")
+    implementation("org.jeasy:easy-random-core:5.0.0")
+    implementation("io.jsonwebtoken:jjwt:0.2")
+    implementation("io.springfox:springfox-swagger-ui:3.0.0")
+    implementation("io.springfox:springfox-swagger2:3.0.0")
+    implementation("org.springdoc:springdoc-openapi-ui:1.5.0")
+    implementation("org.springdoc:springdoc-openapi-data-rest:1.5.0")
+    implementation("org.springdoc:springdoc-openapi-kotlin:1.5.0")
 
     kapt("org.mapstruct:mapstruct-processor:1.4.2.Final")
     compile("org.postgresql:postgresql:42.2.6")
-    compile("io.springfox:springfox-swagger2:3.0.0")
-    compile("io.springfox:springfox-swagger-ui:3.0.0")
     compileOnly("org.projectlombok:lombok")
 
     runtimeOnly("org.postgresql:postgresql")

@@ -35,9 +35,9 @@ class TaskStatusServiceImpl(
     }
 
     override fun getForDesk(getDeskTaskStatusesRequest: GetDeskTaskStatusesRequest): List<TaskStatus> {
-        val deskValueId = deskValueRepository.getByDeskId(getDeskTaskStatusesRequest.deskId).getId()
+        val deskValueId = deskValueRepository.getByDeskId(getDeskTaskStatusesRequest.deskId).id
         val taskStatusEntities = taskStatusRepository.getByDeskValueId(deskValueId!!)
-            .sortedBy { i -> i.getId() }
+            .sortedBy { i -> i.id }
 
         return taskStatusEntities.stream()
             .map { priorityTypeEntity -> taskStatusMapper.map(priorityTypeEntity) }

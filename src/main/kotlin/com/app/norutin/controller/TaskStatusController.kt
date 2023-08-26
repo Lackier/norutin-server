@@ -1,4 +1,4 @@
-package com.app.norutin.controller.settings
+package com.app.norutin.controller
 
 import com.app.norutin.model.TaskStatus
 import com.app.norutin.model.request.create.CreateDeskTaskStatusRequest

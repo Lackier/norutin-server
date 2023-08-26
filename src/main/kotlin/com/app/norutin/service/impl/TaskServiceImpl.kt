@@ -49,8 +49,8 @@ class TaskServiceImpl(
         var taskEntity = taskMapper.map(newTask)
         taskEntity.desk = deskService.find(newTask.deskId)
         taskEntity.status = taskStatusService.find(newTask.statusId!!)
-        taskEntity.type = taskTypeService.find(newTask.typeId!!)
-        taskEntity.priority = priorityTypeService.find(newTask.priorityId!!)
+        if (newTask.typeId != null) taskEntity.type = taskTypeService.find(newTask.typeId!!)
+        if (newTask.priorityId != null) taskEntity.priority = priorityTypeService.find(newTask.priorityId!!)
 
         taskEntity = taskRepository.save(taskEntity)
         return taskMapper.map(taskEntity)
@@ -73,8 +73,9 @@ class TaskServiceImpl(
         }
         taskEntity.description = editTaskRequest.description!!
         taskEntity.status = taskStatusService.find(editTaskRequest.statusId!!)
-        taskEntity.type = taskTypeService.find(editTaskRequest.typeId!!)
-        taskEntity.priority = priorityTypeService.find(editTaskRequest.priorityId!!)
+        if (editTaskRequest.typeId != null) taskEntity.type = taskTypeService.find(editTaskRequest.typeId!!)
+        if (editTaskRequest.priorityId != null) taskEntity.priority =
+            priorityTypeService.find(editTaskRequest.priorityId!!)
 
         return of(taskMapper.map(taskRepository.save(taskEntity)))
     }

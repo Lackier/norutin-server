@@ -57,7 +57,7 @@ class DeskServiceImpl(
 
         deskSettingsService.createSettings(newDeskEntity)
         if (createDeskRequest.fillDefaultSettings) {
-            deskSettingsService.createDefaultSettings(newDeskEntity.getId()!!)
+            deskSettingsService.createDefaultSettings(newDeskEntity.id!!)
         }
 
         return deskMapper.map(newDeskEntity)
@@ -78,7 +78,7 @@ class DeskServiceImpl(
             return empty()
         }
 
-        deskSettingsService.deleteAll(deskEntity.get().getId()!!)
+        deskSettingsService.deleteAll(deskEntity.get().id!!)
 
         deskRepository.delete(deskEntity.get())
 

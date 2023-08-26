@@ -35,9 +35,9 @@ class PriorityTypeServiceImpl(
     }
 
     override fun getForDesk(getDeskPriorityTypesRequest: GetDeskPriorityTypesRequest): List<TaskPriority> {
-        val deskValueId = deskValueRepository.getByDeskId(getDeskPriorityTypesRequest.deskId).getId()
+        val deskValueId = deskValueRepository.getByDeskId(getDeskPriorityTypesRequest.deskId).id
         val priorityTypeEntities = priorityTypeRepository.getByDeskValueId(deskValueId!!)
-            .sortedBy { i -> i.getId() }
+            .sortedBy { i -> i.id }
 
         return priorityTypeEntities.stream()
             .map { priorityTypeEntity -> priorityTypeMapper.map(priorityTypeEntity) }

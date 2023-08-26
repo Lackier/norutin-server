@@ -1,4 +1,4 @@
-package com.app.norutin.controller.desk
+package com.app.norutin.controller
 
 import com.app.norutin.model.Desk
 import com.app.norutin.model.request.create.CreateDeskRequest
@@ -6,8 +6,8 @@ import com.app.norutin.model.request.edit.EditDeskRequest
 import com.app.norutin.model.request.get.GetDesksRequest
 import com.app.norutin.model.response.ApiError
 import com.app.norutin.model.response.ServerResponse
-import com.app.norutin.security.SecurityService
 import com.app.norutin.service.api.DeskService
+import com.app.norutin.service.api.UserService
 import lombok.extern.slf4j.Slf4j
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -19,14 +19,14 @@ import java.net.URISyntaxException
 @RequestMapping("/api/desks")
 @CrossOrigin
 class DeskController(
-    private val securityService: SecurityService,
+    private val userService: UserService,
     private val deskService: DeskService
 ) {
 
     @GetMapping
     @Throws(URISyntaxException::class)
     fun getDesks(getDesksRequest: GetDesksRequest): ResponseEntity<List<Desk>> {
-        val user = securityService.currentUser() ?: return ResponseEntity.badRequest().body(null)
+        val user = userService.currentUser() ?: return ResponseEntity.badRequest().body(null)
 
         val desks = deskService.getUserDesks(user)
 
@@ -49,7 +49,7 @@ class DeskController(
     @PostMapping("/create")
     @Throws(URISyntaxException::class)
     fun createDesk(createDeskRequest: CreateDeskRequest): ResponseEntity<ServerResponse<Desk>> {
-        val user = securityService.currentUser() ?: return ResponseEntity.badRequest().body(null)
+        val user = userService.currentUser() ?: return ResponseEntity.badRequest().body(null)
 
         val desk = deskService.create(createDeskRequest, user.id!!)
 
@@ -59,7 +59,7 @@ class DeskController(
     @PostMapping("/edit")
     @Throws(URISyntaxException::class)
     fun editDesk(editDeskRequest: EditDeskRequest): ResponseEntity<ServerResponse<Desk>> {
-        val user = securityService.currentUser() ?: return ResponseEntity.badRequest().body(null)
+        val user = userService.currentUser() ?: return ResponseEntity.badRequest().body(null)
 
         val desk = deskService.edit(editDeskRequest, user.id!!)
 

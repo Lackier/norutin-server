@@ -2,30 +2,28 @@ package com.app.norutin.entity.user
 
 import com.app.norutin.entity.AbstractEntity
 import com.app.norutin.entity.desk.DeskEntity
-import java.util.Date
 import javax.persistence.*
 
 @Entity
 @Table(name = "users")
 open class UserEntity(
-    id: Int?,
+        id: Int?,
 
-    @Column(name = "name")
-    open val name: String,
+        val username: String,
 
-    @Column(name = "create_dt")
-    open var createDate: Date,
+        var password: String,
 
-    @Column(name = "uid")
-    open val uid: String,
+        val phone: String,
 
-    @Column(name = "email")
-    open val email: String,
+        val email: String,
 
-    @Column(name = "phone_number")
-    open val phoneNumber: String,
+        @ManyToMany(fetch = FetchType.EAGER)
+        @JoinTable(name = "user_roles",
+                joinColumns = [JoinColumn(name = "user_id", referencedColumnName = "id")],
+                inverseJoinColumns = [JoinColumn(name = "role_id", referencedColumnName = "id")])
+        var roles: List<RoleEntity?>?,
 
-    @OneToMany
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    open val desks: List<DeskEntity>?
+        @OneToMany
+        @JoinColumn(name = "user_id", referencedColumnName = "id")
+        open val desks: List<DeskEntity>?
 ) : AbstractEntity(id)

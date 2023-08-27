@@ -12,6 +12,8 @@ import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.*
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 import javax.servlet.http.HttpServletRequest
 
 
@@ -26,7 +28,35 @@ class UserController(
 ) {
     @PostMapping("/signup")
     fun signUp(@RequestBody signUpRequest: SignUpRequest): User {
+        if (signUpRequest.email != null) {
+            validateEmail(signUpRequest.email)
+        }
+
+        if (signUpRequest.phone != null) {
+            validatePhoneNumber(signUpRequest.phone)
+        }
+
         return userService.register(signUpRequest);
+    }
+
+    fun validateEmail(email: String) {
+        val emailPattern = "^[A-Za-z0-9+_.-]+@(.+)\$"
+        val pattern = Pattern.compile(emailPattern)
+        val matcher: Matcher = pattern.matcher(email)
+
+        if (!matcher.matches()) {
+            throw IllegalArgumentException("Invalid email format")
+        }
+    }
+
+    fun validatePhoneNumber(phoneNumber: String) {
+        val phoneNumberPattern = "^(\\+[0-9]{11,12})\$"
+        val pattern = Pattern.compile(phoneNumberPattern)
+        val matcher: Matcher = pattern.matcher(phoneNumber)
+
+        if (!matcher.matches()) {
+            throw IllegalArgumentException("Invalid phone number format")
+        }
     }
 
     @PostMapping("/login")

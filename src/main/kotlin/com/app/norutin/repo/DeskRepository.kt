@@ -10,4 +10,5 @@ import java.util.*
 interface DeskRepository : JpaRepository<DeskEntity, Int> {
     override fun findById(id: Int): Optional<DeskEntity>
     fun findByUser(user: UserEntity): List<DeskEntity>
+    fun findByUserId(userId: Int): List<DeskEntity>
 }

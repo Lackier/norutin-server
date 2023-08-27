@@ -2,7 +2,6 @@ package com.app.norutin.service.impl
 
 import com.app.norutin.entity.desk.DeskEntity
 import com.app.norutin.mapper.DeskMapper
-import com.app.norutin.mapper.UserMapper
 import com.app.norutin.model.Desk
 import com.app.norutin.model.User
 import com.app.norutin.model.request.create.CreateDeskRequest
@@ -25,12 +24,9 @@ class DeskServiceImpl(
     private val deskSettingsService: DeskSettingsService
 ) : DeskService {
     private val deskMapper: DeskMapper = Mappers.getMapper(DeskMapper::class.java)
-    private val userMapper: UserMapper = Mappers.getMapper(UserMapper::class.java)
 
     override fun getUserDesks(user: User): List<Desk> {
-        val userEntity = userMapper.map(user)
-
-        val deskEntities = deskRepository.findByUser(userEntity)
+        val deskEntities = deskRepository.findByUserId(user.id!!)
 
         return deskEntities.stream()
             .map { deskEntity -> deskMapper.map(deskEntity) }

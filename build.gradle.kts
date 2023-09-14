@@ -23,7 +23,7 @@ configurations {
 flyway {
     url = "jdbc:postgresql://localhost:5432/norutin-db"
     //todo use when deploying to docker
-    //url = "jdbc:postgresql://postgres:5432/norutin-db"
+    //url = "jdbc:postgresql://norutin-server-db-1:5432/norutin-db"
     user = "postgres"
     password = "postgres"
     schemas = arrayOf("public")

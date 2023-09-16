@@ -1,6 +1,5 @@
 Веб-приложение для планирования задач 
 
-
 user-cases:
 - авторизация 
 	- логин
@@ -38,7 +37,6 @@ entities:
 - роль тимэйта (админ, модератор, обычный, гость) (in future)
 
 Controllers:
-
 - userController
 	- signup
 	- update
@@ -71,6 +69,11 @@ Used technologies:
 - Tomcat for server
 - Mapstruct to generate mappers
 
+To open swagger:
+- http://localhost:8080/swagger-ui/index.html#/
+- /v3/api-docs
+
+This part is still in the process, trying to fix configurations to successfully run on remote server using docker
 How to run using docker
 - change database settings in 'build.gradle.kts' and in 'application.properties'
 - run docker-compose.yml or 'docker compose up'
@@ -100,9 +103,7 @@ to create database in running container, do the following:
 docker rm -f $(docker ps -aq) 		kill all containers
 docker rm <container-id> 			kill one container
 
-
 scp -r D:\поликек\6\проектирование\norutin-server root@194.58.121.40:/var/norutin-server
-
 cd /var/norutin-server
 
 wget https://download.java.net/openjdk/jdk15/ri/openjdk-15+36_linux-x64_bin.tar.gz

@@ -43,7 +43,7 @@ dependencies {
     implementation("org.flywaydb:flyway-core")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.mapstruct:mapstruct:1.4.2.Final")
+    implementation("org.mapstruct:mapstruct:1.5.0.Final")
     implementation("org.jeasy:easy-random-core:5.0.0")
     implementation("io.jsonwebtoken:jjwt:0.2")
     implementation("io.springfox:springfox-swagger-ui:3.0.0")
@@ -52,7 +52,7 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-data-rest:1.5.0")
     implementation("org.springdoc:springdoc-openapi-kotlin:1.5.0")
 
-    kapt("org.mapstruct:mapstruct-processor:1.4.2.Final")
+    kapt("org.mapstruct:mapstruct-processor:1.5.0.Final")
     compile("org.postgresql:postgresql:42.2.6")
     compileOnly("org.projectlombok:lombok")
 
